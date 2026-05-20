@@ -1,0 +1,6 @@
+# Ignora artefatos que não devem ser rastreados pelo DVC
+mlruns/
+__pycache__/
+*.pyc
+.env
+.venv

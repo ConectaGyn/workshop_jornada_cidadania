@@ -1,0 +1,40 @@
+stages:
+
+  download:
+    desc: "Baixa o dataset IBM Telco Churn e salva localmente"
+    cmd: python src/download_data.py
+    deps:
+      - src/download_data.py
+    outs:
+      - data/raw/telco_churn.csv
+
+  train:
+    desc: "Treina o modelo e registra no MLflow"
+    cmd: python src/train.py
+    deps:
+      - src/train.py
+      - data/raw/telco_churn.csv
+    params:
+      - params.yaml:
+          - train
+          - model
+    metrics:
+      - metrics/metrics.json:
+          cache: false
+
+  gate:
+    desc: "Valida que o novo modelo não regride vs. Staging"
+    cmd: python src/metric_gate.py
+    deps:
+      - src/metric_gate.py
+      - metrics/metrics.json
+
+  export:
+    desc: "Exporta o artefato do modelo do MLflow Staging"
+    cmd: python src/export_model.py
+    deps:
+      - src/export_model.py
+    outs:
+      - model_artifact:
+          cache: false
+          persist: true

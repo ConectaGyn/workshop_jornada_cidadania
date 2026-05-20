@@ -5,3 +5,5 @@ mlflow
 fastapi
 uvicorn
 joblib
+dvc>=3.0.0
+pyyaml

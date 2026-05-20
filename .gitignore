@@ -2,6 +2,17 @@
 mlruns/
 mlflow.db
 
+# dvc
+/tmp/
+.dvc/cache
+.dvc/tmp
+
+# dados brutos (versionados pelo DVC, não pelo Git)
+data/raw/
+
+# métricas geradas (sem cache, mas não committed)
+metrics/
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
