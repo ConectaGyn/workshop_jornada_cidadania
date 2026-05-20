@@ -1,0 +1,7 @@
+pandas
+scikit-learn
+category-encoders
+mlflow
+fastapi
+uvicorn
+joblib
